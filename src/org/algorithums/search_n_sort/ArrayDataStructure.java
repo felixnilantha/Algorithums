@@ -1,7 +1,7 @@
 package org.algorithums.search_n_sort;
 
 public class ArrayDataStructure {
-
+//{4,5,6,2,1,7,10,3,8,9};
 	private int[] intArray = new int[50];
 
 	private int arraySize = 10;
@@ -11,6 +11,8 @@ public class ArrayDataStructure {
 		for (int i = 0; i < arraySize; i++) {
 			intArray[i] = (int) (Math.random() * 10) + 10;
 		}
+		
+		
 	}
 
 	public int get(int index) {
@@ -127,15 +129,29 @@ public class ArrayDataStructure {
 
 		}
 	}
+	
+	/* Start with a sub list of the entire list
+	 * first the sub list size is one(1) and we assume 
+	 * that list is completely sorted.
+	 * 
+	 * List of one(1) is always sorted and its a safe assumption to made
+	 * 
+	 * In the worst case if the original list was sorted descending and needed to be 
+	 * sorted ascending N elements are checked and swapped
+	 * 
+	 * Worst case complexity of bubble sort is O(N^2)
+	 * */
 
 	public void insertionSort() {
-
+		
 		for (int i = 1; i < arraySize; i++) {
 
 			int j = i;
 			int insertValue = intArray[i];
+			// this will check the adjacent element and swap the values if needed
 			while ((j > 0) && (intArray[j - 1] > insertValue)) {
-				intArray[j] = intArray[j - 1];
+				 // reducing j will make sure the elements bubbled to the correct sorting positions 
+				swapValues(j, j - 1);
 				j--;
 
 				printHorzArray(i, j);
@@ -158,7 +174,7 @@ public class ArrayDataStructure {
 	 * In the worst case if the original list was sorted descending and needed to be 
 	 * sorted ascending N elements are checked and swapped
 	 * 
-	 * The complexity of bubble sort is O(N^2) but its a stable sort and could brake the loop early
+	 * Worst complexity of bubble sort is O(N^2) but its a stable sort and could brake the loop early
 	 */
 
 	public void bubbleSort() {
@@ -257,7 +273,7 @@ public class ArrayDataStructure {
 		ArrayDataStructure array = new ArrayDataStructure();
 
 		array.generateRandomArray();
-		array.bubbleSort();
+		array.insertionSort();
 	}
 
 }
